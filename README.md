@@ -14,19 +14,21 @@
 ## **Technologies Used**
 
 * C#
+* Emgu CV (2.2.1)
 
 #
 
 ## **Installation**
 
 * Open Visual Studio and select "Open a project or a solution".
-* Browse to the directory where the repository is cloned and then select folder V1.
+* Browse to the directory where the repository is cloned and then select folder V2.
 * Then navigate to ATMclassLibrary folder and then select **ATMclassLibrary.sln**.
 * Start Debug to generate **ATMclassLibrary.dll** which is used for ATMClienteApp.
 * Close Project and "Open a project or a solution".
 * Then navigate to ATMClienteApp folder and then select **ATMClienteApp.sln**.
 * Check if ATMclassLibrary under References is loaded or not.
-* Start Debug and ATM application will run providing similar experience to an actual ATM.
+* Also Check " Emgu. CV "," Emgu.CV.UI " and " Emgu.Util " are loaded in References or not.
+* Start Debug and ATM application will run providing similar experience to an actual ATM with either login using four digit PIN or using his/her face for login.
 
 #
 
@@ -36,7 +38,10 @@
 
 * Before performing any transaction, the user must enter his or her name on an input screen as we want test the system.
 * In real ATM the debit card/ credit card inserted will perform this step.
-* Since the operation of this input screen should simulate the normal operation of an ATM, the PIN should not appear on the screen. 
+* Since the operation of this input screen should simulate the normal operation of an ATM, the PIN should not appear on the screen.
+* If the user is selecting "Recognise Face" then Face Recogniser form will open which will display Name of the Person detected as well as no. of persons detected after the user has granted permission to open camera and start detection.
+* If the user is selecting "Add Face Data" option when his/her face is not registered then user must first click "Detect and Recognise" to start camera and then select "Add Face Data" to save his/her image for further use after the system shows that the face is detected.
+* On successful validation by PIN or by Face, the ATM Main Page will be opened to perform transactions as per requirement of user.
 * In addition to the message which appears after every unsuccessful attempt, if after three tries the PIN matching the name has not been macthed, the application should display a message requesting the user to try using the ATM again later.
 * The names and PINs of users must be validated using data contained in the Customers.txt text file having the following structure:
 
@@ -80,6 +85,8 @@
 
 ### **General Rules**
 
+* **Face Recogniser** : The timer is set to 5 seconds before the user is redirected to Main ATM Transaction Page to test various situations. If the user's face is not matched or there are no real persons in frame then the ATM stops the current process after 20 seconds(timer can be increased or decreased as per physical availability in real ATM) and redirects users to startup page. 
+
 * **Check Account Balance** : The application must check the account balance before doing a transaction. Any transaction that would result in a negative balance must be rejected.
 
 * **Update Account Balance** : The balance of the account affected by a transaction should be updated and displayed after each transaction.
@@ -99,6 +106,7 @@
 ### **System Administrator Page**
 
 * The system administrator, as any other user, must enter his or her name and PIN on the same input screen.
+* Currently the system administrator can only login by using four digit PIN, the face option for Administrator is not used for security concerns.
 * The system administrator should perform only system transactions (he or she has no personal account).
 * Once access has been authorized, a special menu is displayed.
 * This menu offers the following options:
